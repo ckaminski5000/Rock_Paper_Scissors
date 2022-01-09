@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+
+      function computerPlay(){
+
+          let test = Math.floor(Math.random() * 3);
+
+          if(test === 1){
+              return 'Rock';
+          }
+          else if(test === 2){
+              return 'Paper'
+          }
+          else{
+              return 'Scissors'
+          }
+      }
+
+      function playerPlay(){
+
+        let word = prompt('Enter in Rock, Paper or Scissors:');
+        word = word.toUpperCase();
+
+
+        while(!_.includes(['ROCK', 'PAPER', 'SCISSORS'], word)){
+            
+            word = prompt('You have entered in an incorrect term.  Try again! Enter in Rock, Paper or Scissors:');
+            word = word.toUpperCase();
+            
+            }
+        
+        return word;
+      }
+
+      function playGame(playerSelection, computerSelection){
+
+          playerSelection = playerSelection.toUpperCase();
+          computerSelection = computerSelection.toUpperCase();
+
+          if(playerSelection === 'PAPER' && computerSelection === 'SCISSORS'){
+              return 'You Lose! Scissors beats Paper!'
+          }
+          else if(playerSelection === 'PAPER' && computerSelection === 'ROCK'){
+              return 'You Win! Paper beats Rock!'
+
+          }
+          else if(playerSelection === 'ROCK' && computerSelection === 'SCISSORS'){
+              return 'You Win! Rock beats Scissors!'
+          }else if(playerSelection === 'ROCK' && computerSelection === 'PAPER'){
+              return 'You Lose! Paper beats Rock!'
+          }
+          else if(playerSelection === 'SCISSORS' && computerSelection === 'PAPER'){
+              return 'You Win! Paper beats Scissors!'
+          }else if(playerSelection === 'SCISSORS' && computerSelection === 'ROCK'){
+              return 'You Lose! Rock beats Scissors!'
+          }
+          else if(playerSelection === computerSelection){
+              return 'You both picked the same thing.  It\'s a tie!'
+          }
+          else{
+              return 'ERROR!'
+          }
+
+        }
+
+
+
+
+      function game(){
+
+          let playerScore = 0;
+          let computerScore = 0;
+
+          for(let i = 0; i < 6; i++){
+
+            let playerWord = playerPlay();
+            let computerWord = computerPlay();
+
+            let test = playGame(playerWord, computerWord);
+
+            if(test.includes('Win')){
+                playerScore += 1;
+                console.log(test);
+            }
+            else if(test.includes('Lose')){
+                computerScore += 1;
+                console.log(test);
+            }
+
+
+
+          }
+
+          if(playerScore > computerScore){
+            return console.log(`You have won the game! Here are the results: Your score is ${playerScore} and the computer\'s score is ${computerScore}`);
+
+          }
+          else if(playerScore < computerScore){
+            return console.log(`You have lost the game! Here are the results: Your score is ${playerScore} and the computer\'s score is ${computerScore}`);
+          }
+          else{
+            return console.log(`It's a tie! Here are the results: Your score is ${playerScore} and the computer\'s score is ${computerScore}`);
+
+          }
+
+
+
+      }
+
+      game();
+
+    </script>
+  </body>
+</html>
